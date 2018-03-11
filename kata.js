@@ -1,5 +1,5 @@
 const parse = str => {
-  str.replace('\n', '');
+  str = str.replace(/\n/g, '');
 
   const clearSpaces = s => {
     while (s.charAt(0) === ' ')
@@ -98,7 +98,7 @@ const parse = str => {
     }
     else if ((val[0] === '"' || val[0] === '\'') && (val[val.length - 1] === '"' || val[val.length - 1] === '\'')) {
       const res = val.slice(1, val.length - 1);
-      if (res.match(/(\'|\")/))
+      if (res.match(/('|")/) && !res.match(/(\\'|\\")/))
         throw new Error(`Invalid string: "${res}"`);
       return res;
     }
@@ -111,14 +111,3 @@ const parse = str => {
 
   return parseVal(str);
 };
-
-
-// test part
-// console.log(JSON.parse('[]'));
-
-console.log(parse('[null, true, false, [], 1, {"a":12}]'));
-// console.log(parse('[1, \'a\', []]'));
-// console.log(parse('[{ "a": { "b": 3 }, "c": 2 }, { "a": { "b": 99 }, "c": 4 }]'));
-// console.log(parse('0'));
-// console.log(parse('{ "a": " kek", "b": [1, 2, {"suk": "yes"}], "c": 123 }'));
-// console.log(JSON.parse('{"a": "hi"}'));
