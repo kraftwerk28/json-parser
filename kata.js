@@ -135,7 +135,6 @@ const parse = str => {
     else if (val === 'false') return false;
     else if (val === 'null') return null;
     else throw new Error(`Invalid expression: "${val}"`);
-
   };
 
   const full = () => {
